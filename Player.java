@@ -12,47 +12,85 @@ public class Player extends Actor
      * Act - do whatever the Player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    GreenfootImage[] walkRight = new GreenfootImage[3];
-    GreenfootImage[] walkLeft = new GreenfootImage[3];
+    GreenfootImage[] R_idle = new GreenfootImage[4];
+    GreenfootImage[] L_idle = new GreenfootImage[4];
+    
+    GreenfootImage[] R_walk = new GreenfootImage[4];
+    GreenfootImage[] L_walk = new GreenfootImage[4];
+    
     String facing = "right";
     
     int imageIndex = 0;
     SimpleTimer animationTimer = new SimpleTimer();
-    public void player()
+    public Player()
     {
-        for(int i = 0; i < walkRight.length; i++)
+        //idle animation
+        for(int i = 0; i < R_idle.length; i++)
         {
-             walkRight[i] = new GreenfootImage("walking_left/walk" + i + ".png");
-             walkRight[i].scale(90, 80);
+             R_idle[i] = new GreenfootImage("images/idle_right/idle" + i + ".png");
+             R_idle[i].scale(150, 224);
         }
-        setImage(walkRight[0]);
+        for(int i = 0; i < R_idle.length; i++)
+        {
+             L_idle[i] = new GreenfootImage("images/idle_right/idle" + i + ".png");
+             L_idle[i].mirrorHorizontally();
+             L_idle[i].scale(150, 224);
+        }
         
-        for(int i = 0; i < walkRight.length; i++)
+        //walking animation
+        for(int i = 0; i < R_idle.length; i++)
         {
-             walkLeft[i] = new GreenfootImage("walking_left/walk" + i + ".png");
-             walkLeft[i].mirrorHorizontally();
-             walkLeft[i].scale(90, 80);
+             R_walk[i] = new GreenfootImage("images/walking_right/walk" + i + ".png");
+             R_walk[i].scale(150, 224);
         }
+        for(int i = 0; i < R_idle.length; i++)
+        {
+             L_walk[i] = new GreenfootImage("images/walking_right/walk" + i + ".png");
+             L_walk[i].mirrorHorizontally();
+             L_walk[i].scale(150, 224);
+        }
+        
+        animationTimer.mark();
+        
+        //starting image for the player
+        setImage(R_idle[0]);
     }
     
     public void animatePlayer()
-    {
-        if(animationTimer.millisElapsed() < 1500)
+    {    
+        if(animationTimer.millisElapsed() < 200)
         {
             return;
         }
+        animationTimer.mark();
         
+        //idle animation
         if(facing.equals("right"))
         {
-            setImage(walkRight[imageIndex]);
-            imageIndex = (imageIndex + 1) % walkRight.length;
+            setImage(R_idle[imageIndex]);
+            imageIndex = (imageIndex + 1) % R_idle.length;
         }
         else
         {
-            setImage(walkLeft[imageIndex]);
-            imageIndex = (imageIndex + 1) % walkLeft.length;
+            setImage(L_idle[imageIndex]);
+            imageIndex = (imageIndex + 1) % L_idle.length;
+        }
+        
+        //walking animation
+            if(Greenfoot.isKeyDown("left"))
+        {
+            //walking animation for left
+            setImage(L_walk[imageIndex]);
+            imageIndex = (imageIndex + 1) % L_walk.length;
+        }
+        if(Greenfoot.isKeyDown("right"))
+        {
+            //walking animation for right
+            setImage(R_walk[imageIndex]);
+            imageIndex = (imageIndex + 1) % R_walk.length;
         }
     }
+
     
     public void act()
     {
@@ -66,5 +104,7 @@ public class Player extends Actor
             move(2);
             facing = "right";
         }
+        
+        animatePlayer();
     }
 }
