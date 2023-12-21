@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class insideCabin extends World
 {
-
+    Label talk = new Label("This place is pretty clean, 
     /**
      * Constructor for objects of class insideCabin.
      * 
@@ -18,5 +18,7 @@ public class insideCabin extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
         
+        messageBack messageBack = new messageBack();
+        addObject(messageBack, 300, 335);
     }
 }
