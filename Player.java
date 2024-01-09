@@ -101,6 +101,11 @@ public class Player extends Actor
             facing = "right";
         }
         
+        if(Greenfoot.isKeyDown("space"))
+        {
+            
+        }
+        
         animatePlayer();
     }
 }
