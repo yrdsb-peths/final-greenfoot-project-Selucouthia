@@ -25,6 +25,6 @@ public class MyWorld extends World
         addObject(sign, 22, 337);
         
         Player player = new Player();
-        addObject(player, 150, 296);
+        addObject(player, 150, 302);
     }
 }

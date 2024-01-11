@@ -7,6 +7,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Ending_left extends World
 {
+    GreenfootSound rotarySlamming = new GreenfootSound("rotarySlammingDown.mp3");
+    GreenfootSound rotaryRing = new GreenfootSound("rotaryRinging.mp3");
     private SimpleTimer timer = new SimpleTimer();
     private int currentLabelIndex = 0;
     
@@ -15,10 +17,12 @@ public class Ending_left extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
         
+        rotaryRing.play();
         messages();
     }
 
-    private void messages() {
+    private void messages() 
+    {
         timer.mark(); // starts the timer
 
         Label[] message = {
@@ -54,6 +58,7 @@ public class Ending_left extends World
             if (!getObjects(Label.class).isEmpty()) {
                 removeObject(getObjects(Label.class).get(0));
             }
+            rotarySlamming.play();
             addObject(new Label("Ending 1/2", 30), getWidth() / 2, 350);
             currentLabelIndex++;
         }

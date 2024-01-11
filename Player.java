@@ -29,22 +29,22 @@ public class Player extends Actor
         for(int i = 0; i < R_idle.length; i++)
         {
             R_idle[i] = new GreenfootImage("images/idle_right/idle" + i + ".png");
-            R_idle[i].scale(150, 224);
+            R_idle[i].scale(130, 200);
             
             L_idle[i] = new GreenfootImage("images/idle_right/idle" + i + ".png");
             L_idle[i].mirrorHorizontally();
-            L_idle[i].scale(150, 224);
+            L_idle[i].scale(130, 200);
         }
         
         //walking animation
         for(int i = 0; i < R_walk.length; i++)
         {
              R_walk[i] = new GreenfootImage("images/walking_right/walk" + i + ".png");
-             R_walk[i].scale(150, 224);
+             R_walk[i].scale(130, 200);
              
              L_walk[i] = new GreenfootImage("images/walking_right/walk" + i + ".png");
              L_walk[i].mirrorHorizontally();
-             L_walk[i].scale(150, 224);
+             L_walk[i].scale(130, 200);
         }
         
         animationTimer.mark();
@@ -80,7 +80,7 @@ public class Player extends Actor
             setImage(L_walk[walkIndex]);
             walkIndex = (walkIndex + 1) % L_walk.length;
         }
-        else if(Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d"))
+        else if(Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d") || Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s") || Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w"))
         {
             //walking animation for right
             setImage(R_walk[walkIndex]);
@@ -101,9 +101,15 @@ public class Player extends Actor
             facing = "right";
         }
         
-        if(Greenfoot.isKeyDown("space"))
+        if(Greenfoot.isKeyDown("down") || Greenfoot.isKeyDown("s"))
         {
-            
+            setLocation(getX(), getY() +2);
+            facing = "right";
+        }
+        if(Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w"))
+        {
+            setLocation(getX(), getY() -2);
+            facing = "right";
         }
         
         animatePlayer();

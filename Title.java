@@ -13,9 +13,13 @@ public class Title extends World
      * Constructor for objects of class Title.
      * 
      */
+    
     public Title()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
+        
+        whiteCar car = new whiteCar();
+        addObject(car, 140, 327);
     }
 }
